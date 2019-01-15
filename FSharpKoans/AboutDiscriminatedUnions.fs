@@ -33,7 +33,7 @@ module ``about discriminated unions`` =
 
         let choice = Mustard
 
-        AssertEquality (toColor choice) __
+        AssertEquality (toColor choice) "yellow"
 
         (* TRY IT: What happens if you remove a case from the above pattern 
                    match? *)
@@ -46,10 +46,10 @@ module ``about discriminated unions`` =
             | Number 7 -> "me too!"
             | Bourbon "Bookers" -> "me too!"
             | Bourbon b -> "I prefer Bookers to " + b
-            | Number _ -> "I'm partial to 7"
+            | Number i -> "I'm partial to 7"
 
         let bourbonResult = saySomethingAboutYourFavorite <| Bourbon "Maker's Mark"
         let numberResult = saySomethingAboutYourFavorite <| Number 7
         
-        AssertEquality bourbonResult __
-        AssertEquality numberResult __
+        AssertEquality bourbonResult "I prefer Bookers to Maker's Mark"
+        AssertEquality numberResult "me too!"
