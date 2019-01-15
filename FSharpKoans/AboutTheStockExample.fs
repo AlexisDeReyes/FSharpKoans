@@ -1,7 +1,5 @@
 ﻿namespace FSharpKoans
 open FSharpKoans.Core
-open System.Collections.Generic
-open System.Collections.Generic
 
 //---------------------------------------------------------------
 // Apply Your Knowledge!
