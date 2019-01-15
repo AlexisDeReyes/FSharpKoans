@@ -58,8 +58,22 @@ module ``about the stock example`` =
     // tests for yourself along the way. You can also try 
     // using the F# Interactive window to check your progress.
 
+    let splitResults (x:string) =
+        let stringList = x.Split([|','|])
+        stringList
+
+    [<Koan>]
+    let PrintResultLists() =
+        stockData.[0].Split([|','|])
+
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+        let splitResults (x:string) =
+            let stringList = x.Split([|','|])
+            stringList
+
+        let result =  
+            stockData
+            |> List.map (fun x -> ()) 
         
         AssertEquality "2012-03-13" result
