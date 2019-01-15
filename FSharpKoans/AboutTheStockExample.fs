@@ -1,5 +1,7 @@
 ﻿namespace FSharpKoans
 open FSharpKoans.Core
+open System.Collections.Generic
+open System.Collections.Generic
 
 //---------------------------------------------------------------
 // Apply Your Knowledge!
@@ -28,6 +30,15 @@ open FSharpKoans.Core
 [<Koan(Sort = 15)>]
 module ``about the stock example`` =
     
+
+// to get list, split into date(string), open(float), high(string), low(string), close(float), volume(string), adj close(string)
+// create function to determine the difference between open and close
+// use max function to get highest row.
+
+
+// [["Date", "open", etc...],
+//  ["2012", etc...]
+ 
     let stockData =
         [ "Date,Open,High,Low,Close,Volume,Adj Close";
           "2012-03-30,32.40,32.41,32.04,32.26,31749400,32.26";
@@ -59,21 +70,27 @@ module ``about the stock example`` =
     // using the F# Interactive window to check your progress.
 
     let splitResults (x:string) =
-        let stringList = x.Split([|','|])
-        stringList
+        x.Split([|','|])
 
-    [<Koan>]
-    let PrintResultLists() =
-        stockData.[0].Split([|','|])
+    let filterHeader (x: string[]) =
+        x.[0] <> "Date"      
+
+    let extractData (x: string[]) =
+        (x.[0], float x.[1], float x.[4])
+
+    let compareOpenClose (x: (string * float * float)) =
+        let date, openingValue, closingValue = x
+        abs(openingValue - closingValue)
 
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let splitResults (x:string) =
-            let stringList = x.Split([|','|])
-            stringList
-
-        let result =  
+        let splitResults =  
             stockData
-            |> List.map (fun x -> ()) 
+            |> List.map splitResults
+            |> List.filter filterHeader
+            |> List.map extractData
+            |> List.maxBy compareOpenClose
+
+        let result, opening,  closing = splitResults
         
         AssertEquality "2012-03-13" result
